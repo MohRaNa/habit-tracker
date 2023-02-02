@@ -1,20 +1,12 @@
-import { View, Text } from "react-native";
-import React from "react";
+import * as React from "react";
+import * as RN from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const CalendarScreen = () => {
+export default function CalendarScreen() {
   return (
-    <View>
-      <Text
-        style={{
-          textAlign: "center",
-          fontSize: 30,
-          marginTop: "20%",
-        }}
-      >
-        CalendarScreen
-      </Text>
-    </View>
+    <RN.View>
+      <RN.Text>Aqui app</RN.Text>
+    </RN.View>
   );
-};
-
-export default CalendarScreen;
+}
