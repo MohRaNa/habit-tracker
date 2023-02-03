@@ -4,15 +4,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Icon from "react-native-vector-icons/Entypo";
 
-//screens
+//Screen Tab / Stack
 import CalendarScreen from "./screens/CalendarScreen";
 import HabitScreen from "./screens/HabitScreen";
 import TodoScreen from "./screens/TodoScreen";
+
+//Screen Stack
 import AddCalendar from "./screens/Add/AddCalendar";
 import AddHabit from "./screens/Add/AddHabit";
 import AddToDo from "./screens/Add/AddToDo";
 
+//Navigation Tab
 const Tab = createBottomTabNavigator();
+
+//Navigation Stack
 const CalendarStack = createNativeStackNavigator();
 const HabitStack = createNativeStackNavigator();
 const TodoStack = createNativeStackNavigator();
@@ -20,7 +25,10 @@ const TodoStack = createNativeStackNavigator();
 function CalendarStackScreen() {
   return (
     <CalendarStack.Navigator>
-      <CalendarStack.Screen name="CalendarScreen" component={CalendarScreen} />
+      <CalendarStack.Screen
+        name="CalendarStkScreen"
+        component={CalendarScreen}
+      />
       <CalendarStack.Screen
         name="AddCalendar"
         component={AddCalendar}
