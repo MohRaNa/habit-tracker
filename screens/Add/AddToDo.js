@@ -3,7 +3,7 @@ import * as React from "react";
 
 export default function AddToDo() {
   return (
-    <RN.View style={StyleSheet.container}>
+    <RN.View styles={StyleSheet.container}>
       <RN.Text>Add</RN.Text>
     </RN.View>
   );
