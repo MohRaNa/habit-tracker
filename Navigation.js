@@ -9,6 +9,9 @@ import CalendarScreen from "./screens/CalendarScreen";
 import HabitScreen from "./screens/HabitScreen";
 import TodoScreen from "./screens/TodoScreen";
 import AddCalendar from "./screens/Add/AddCalendar";
+import AddHabit from "./screens/Add/AddHabit";
+import AddToD from "./screens/Add/AddToDo";
+import AddToDo from "./screens/Add/AddToDo";
 
 const Tab = createBottomTabNavigator();
 const CalendarStack = createNativeStackNavigator();
