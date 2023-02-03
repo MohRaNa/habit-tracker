@@ -22,7 +22,7 @@ function CalendarStackScreen() {
     <CalendarStack.Navigator>
       <CalendarStack.Screen name="CalendarScreen" component={CalendarScreen} />
       <CalendarStack.Screen
-        name="AddCalendarScreen"
+        name="AddCalendar"
         component={AddCalendar}
         options={{ presentation: "modal" }}
       />
@@ -34,7 +34,7 @@ function HabitStackScreen() {
     <HabitStack.Navigator>
       <HabitStack.Screen name="HabitStkScreen" component={HabitScreen} />
       <HabitStack.Screen
-        name="AddHabitScreen"
+        name="AddHabit"
         component={AddHabit}
         options={{ presentation: "modal" }}
       />
@@ -46,7 +46,7 @@ function TodoStackScreen() {
     <TodoStack.Navigator>
       <TodoStack.Screen name="ToDoStkScreen" component={TodoScreen} />
       <TodoStack.Screen
-        name="AddToDoScreen"
+        name="AddToDo"
         component={AddToDo}
         options={{ presentation: "modal" }}
       />
