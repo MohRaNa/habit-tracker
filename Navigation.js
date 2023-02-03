@@ -8,8 +8,37 @@ import Icon from "react-native-vector-icons/Entypo";
 import CalendarScreen from "./screens/CalendarScreen";
 import HabitScreen from "./screens/HabitScreen";
 import TodoScreen from "./screens/TodoScreen";
+import AddCalendar from "./screens/Add/AddCalendar";
 
 const Tab = createBottomTabNavigator();
+const CalendarStack = createNativeStackNavigator();
+const HabitStack = createNativeStackNavigator();
+const TodoStack = createNativeStackNavigator();
+
+function CalendarStackScreen() {
+  return (
+    <CalendarStack.Navigator>
+      <CalendarStack.Screen name="CalendarScreen" component={CalendarScreen} />
+      <CalendarStack.Screen name="AddCalendarScreen" component={AddCalendar} />
+    </CalendarStack.Navigator>
+  );
+}
+function HabitStackScreen() {
+  return (
+    <HabitStack.Navigator>
+      <HabitStack.Screen name="HabitStkScreen" component={HabitScreen} />
+      <HabitStack.Screen name="AddHabitScreen" component={AddHabit} />
+    </HabitStack.Navigator>
+  );
+}
+function TodoStackScreen() {
+  return (
+    <TodoStack.Navigator>
+      <TodoStack.Screen name="ToDoStkScreen" component={TodoScreen} />
+      <TodoStack.Screen name="AddToDoScreen" component={AddToDo} />
+    </TodoStack.Navigator>
+  );
+}
 
 function MyTabs() {
   return (
@@ -21,7 +50,7 @@ function MyTabs() {
     >
       <Tab.Screen
         name="CalendarScreen"
-        component={CalendarScreen}
+        component={CalendarStackScreen}
         options={{
           tabBarLabel: "Calendar",
           tabBarIcon: ({ color, size }) => (
@@ -31,7 +60,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="HabitScreen"
-        component={HabitScreen}
+        component={HabitStackScreen}
         options={{
           tabBarLabel: "Habit",
           tabBarIcon: ({ color, size }) => (
@@ -41,7 +70,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="TodoScreen"
-        component={TodoScreen}
+        component={TodoStackScreen}
         options={{
           tabBarLabel: "To-Do",
           tabBarIcon: ({ color, size }) => (
