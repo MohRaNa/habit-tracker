@@ -1,20 +1,14 @@
-import { View, Text } from "react-native";
-import React from "react";
+import * as React from "react";
+import * as RN from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const HabitScreen = () => {
+export default function HabitScreen() {
+  const navigation = useNavigation();
   return (
-    <View>
-      <Text
-        style={{
-          textAlign: "center",
-          fontSize: 30,
-          marginTop: "20%",
-        }}
-      >
-        HabitScreen
-      </Text>
-    </View>
+    <RN.View>
+      <RN.Text>Aqui app</RN.Text>
+      <RN.Button title="+" onPress={() => navigation.navigate("AddHabit")} />
+    </RN.View>
   );
-};
-
-export default HabitScreen;
+}

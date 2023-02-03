@@ -8,7 +8,7 @@ export default function CalendarScreen() {
   return (
     <RN.View>
       <RN.Text>Aqui app</RN.Text>
-      <RN.Button title="+" onPress={() => navigation.navigate("Add")} />
+      <RN.Button title="+" onPress={() => navigation.navigate("AddCalendar")} />
     </RN.View>
   );
 }
