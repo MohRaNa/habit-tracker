@@ -4,13 +4,14 @@ import * as React from "react";
 import { database } from "../../src/config/fb";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function AddCalendar({ navigation }) {
-  //Values Name, Date, Priority(Options), Description
+export default function AddHabit({ navigation }) {
+  //Values Name, DWM, time, icon
   const [newItem, setNewItem] = React.useState({
     name: "",
     dwm: "",
     time: "",
     icon: "",
+    createdAt: Date(),
   });
 
   const onSend = async () => {

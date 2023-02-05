@@ -9,6 +9,7 @@ export default function habit({
   dwm,
   time,
   icon,
+  createdAt,
 }) {
   return (
     <RN.View>
@@ -18,21 +19,4 @@ export default function habit({
       <RN.Text>{icon}</RN.Text>
     </RN.View>
   );
-}
-export default function toDo({
-    //Vaules: Name, Date, Priority, Description
-    name,
-    date,
-    priority,
-    description
-})
-{
-    return(
-        <RN.View>
-            <RN.Text>{name}</RN.Text>
-            <RN.Text>{date}</RN.Text>
-            <RN.Text>{priority}</RN.Text>
-            <RN.Text>{description}</RN.Text>
-        </RN.View>
-    )
 }

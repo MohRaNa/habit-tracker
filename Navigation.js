@@ -10,9 +10,9 @@ import HabitScreen from "./screens/HabitScreen";
 import TodoScreen from "./screens/TodoScreen";
 
 //Screen Stack
-import AddCalendar from "./screens/Add/AddCalendar";
 import AddHabit from "./screens/Add/AddHabit";
 import AddToDo from "./screens/Add/AddToDo";
+import AddToDoCal from "./screens/Add/AddToDoCal";
 
 //Navigation Tab
 const Tab = createBottomTabNavigator();
@@ -30,8 +30,8 @@ function CalendarStackScreen() {
         component={CalendarScreen}
       />
       <CalendarStack.Screen
-        name="AddCalendar"
-        component={AddCalendar}
+        name="AddToDoCal"
+        component={AddToDoCal}
         options={{ presentation: "modal" }}
       />
     </CalendarStack.Navigator>

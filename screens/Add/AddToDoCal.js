@@ -5,7 +5,7 @@ import * as React from "react";
 import { database } from "../../src/config/fb";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function AddToDo({ navigation }) {
+export default function AddToDoCal({ navigation }) {
   //Values Name, Date, Priority(Options), Description
   const [newItem, setNewItem] = React.useState({
     name: "",
