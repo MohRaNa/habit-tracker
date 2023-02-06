@@ -1,24 +1,38 @@
 import * as RN from "react-native";
 import * as React from "react";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 
 //firebase
 import { database } from "../../src/config/fb";
 import { collection, addDoc } from "firebase/firestore";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function AddToDoCal({ navigation }) {
   //Values Name, Date, Priority(Options), Description
   const [newItem, setNewItem] = React.useState({
     name: "",
-    date: "",
+    date: new Date(),
+    time: new Date().setTime(),
     priority: "",
     description: "",
-    createdAt: Date(),
+    createdAt: new Date(),
   });
+
   const onSend = async () => {
     await addDoc(collection(database, "ToDoList"), newItem);
     navigation.goBack();
   };
 
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+  const handleConfirm = (date) => {
+    console.warn("A date has been picked ", date);
+    hideDatePicker();
+  };
   return (
     <RN.View style={styles.container}>
       <RN.View>
@@ -30,11 +44,16 @@ export default function AddToDoCal({ navigation }) {
           onChangeText={(text) => setNewItem({ ...newItem, name: text })}
         />
         <RN.Text> Date </RN.Text>
-        <RN.TextInput
-          style={styles.input}
-          placeholder="Add Date"
-          onChangeText={(text) => setNewItem({ ...newItem, date: text })}
-        />
+        <TouchableOpacity>
+          <DateTimePickerAndroid
+            style={{ width: 200 }}
+            value={new Date().getDate()}
+            dateFormat="day month year"
+            minimumDate={new Date().getDate()}
+            maximumDate={new Date().getDate() + 365}
+            // onChange={(date) => setNewItem({ ...newItem, date: date })}
+          />
+        </TouchableOpacity>
         <RN.Text> Priority </RN.Text>
         <RN.TextInput
           style={styles.input}
