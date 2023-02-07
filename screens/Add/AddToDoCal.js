@@ -17,16 +17,22 @@ export default function AddToDoCal({ navigation }) {
   });
   const [mode, setMode] = React.useState("date");
   const [show, setShow] = React.useState(false);
-  const [text, setText] = React.useState("Empty");
+  const [textDate, setTextDate] = React.useState("Empty");
+  const [exc, setExc] = React.useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     RN.setShow(Platform.OS === "android");
-    setNewItem({ ...newItem, date: new Date(currentDate) });
+    setNewItem({ ...newItem, date: currentDate });
 
     let tempDate = new Date(currentDate);
-    let fDate = tempDate.getDate() + "/" + (tempDate.getMonth() + 1);
-    setText(fDate);
+    let fDate =
+      tempDate.getDate() +
+      "/" +
+      (tempDate.getMonth() + 1) +
+      "/" +
+      tempDate.getFullYear;
+    setTextDate(fDate);
 
     console.log(fDate);
   };
@@ -36,9 +42,22 @@ export default function AddToDoCal({ navigation }) {
     setMode(currentMode);
   };
 
+  const checkNullUnd = () => {
+    if (
+      newItem.name == "" ||
+      newItem.date == "" ||
+      newItem.priority == "" ||
+      newItem.time == ""
+    )
+      setExc(true);
+  };
+  //Al presionar el boton Add se enviara todos los datos a la base de datos
   const onSend = async () => {
-    await addDoc(collection(database, "ToDoList"), newItem);
-    navigation.goBack();
+    checkNullUnd();
+    if (exc === false) {
+      await addDoc(collection(database, "ToDoList"), newItem);
+      navigation.goBack();
+    }
   };
 
   return (
@@ -58,14 +77,15 @@ export default function AddToDoCal({ navigation }) {
           onChangeText={(text) => setNewItem({ ...newItem, priority: text })}
         />
         <RN.Text>Date</RN.Text>
-        <RN.Text>{text}</RN.Text>
+        <RN.Text>{textDate}</RN.Text>
         <RN.Button title="DatePicker" onPress={() => showMode("date")} />
         {show && (
           <DateTimePicker
             testID="dateTimePicker"
             value={newItem.date}
             mode={mode}
-            is24Hour="default"
+            is24Hour={true}
+            display="default"
             onChange={onChange}
           />
         )}
