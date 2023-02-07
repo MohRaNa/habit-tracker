@@ -1,38 +1,46 @@
 import * as RN from "react-native";
 import * as React from "react";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
-
+import DateTimePicker from "@react-native-community/datetimepicker";
 //firebase
 import { database } from "../../src/config/fb";
 import { collection, addDoc } from "firebase/firestore";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function AddToDoCal({ navigation }) {
   //Values Name, Date, Priority(Options), Description
   const [newItem, setNewItem] = React.useState({
     name: "",
     date: new Date(),
-    time: new Date().setTime(),
+    time: "",
     priority: "",
     description: "",
     createdAt: new Date(),
   });
+  const [mode, setMode] = React.useState("date");
+  const [show, setShow] = React.useState(false);
+  const [text, setText] = React.useState("Empty");
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    RN.setShow(Platform.OS === "android");
+    setNewItem({ ...newItem, date: new Date(currentDate) });
+
+    let tempDate = new Date(currentDate);
+    let fDate = tempDate.getDate() + "/" + (tempDate.getMonth() + 1);
+    setText(fDate);
+
+    console.log(fDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
 
   const onSend = async () => {
     await addDoc(collection(database, "ToDoList"), newItem);
     navigation.goBack();
   };
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-  const handleConfirm = (date) => {
-    console.warn("A date has been picked ", date);
-    hideDatePicker();
-  };
   return (
     <RN.View style={styles.container}>
       <RN.View>
@@ -43,23 +51,24 @@ export default function AddToDoCal({ navigation }) {
           placeholder="Add Name"
           onChangeText={(text) => setNewItem({ ...newItem, name: text })}
         />
-        <RN.Text> Date </RN.Text>
-        <TouchableOpacity>
-          <DateTimePickerAndroid
-            style={{ width: 200 }}
-            value={new Date().getDate()}
-            dateFormat="day month year"
-            minimumDate={new Date().getDate()}
-            maximumDate={new Date().getDate() + 365}
-            // onChange={(date) => setNewItem({ ...newItem, date: date })}
-          />
-        </TouchableOpacity>
         <RN.Text> Priority </RN.Text>
         <RN.TextInput
           style={styles.input}
           placeholder="Add Priority"
           onChangeText={(text) => setNewItem({ ...newItem, priority: text })}
         />
+        <RN.Text>Date</RN.Text>
+        <RN.Text>{text}</RN.Text>
+        <RN.Button title="DatePicker" onPress={() => showMode("date")} />
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={newItem.date}
+            mode={mode}
+            is24Hour="default"
+            onChange={onChange}
+          />
+        )}
         <RN.Text> Description </RN.Text>
         <RN.TextInput
           style={styles.input}
