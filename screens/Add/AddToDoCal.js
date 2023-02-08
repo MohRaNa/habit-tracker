@@ -21,8 +21,8 @@ export default function AddToDoCal({ navigation }) {
   const [exc, setExc] = React.useState(false);
 
   const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    RN.setShow(Platform.OS === "android");
+    const currentDate = selectedDate || new Date();
+    setShow(Platform.OS === "android");
     setNewItem({ ...newItem, date: currentDate });
 
     let tempDate = new Date(currentDate);
@@ -31,10 +31,8 @@ export default function AddToDoCal({ navigation }) {
       "/" +
       (tempDate.getMonth() + 1) +
       "/" +
-      tempDate.getFullYear;
+      tempDate.getFullYear();
     setTextDate(fDate);
-
-    console.log(fDate);
   };
 
   const showMode = (currentMode) => {
@@ -53,7 +51,7 @@ export default function AddToDoCal({ navigation }) {
   };
   //Al presionar el boton Add se enviara todos los datos a la base de datos
   const onSend = async () => {
-    checkNullUnd();
+    //checkNullUnd();
     if (exc === false) {
       await addDoc(collection(database, "ToDoList"), newItem);
       navigation.goBack();
