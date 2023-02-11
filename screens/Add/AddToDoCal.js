@@ -1,5 +1,6 @@
 import * as RN from "react-native";
 import * as React from "react";
+import Select from "react-native-picker-select";
 import DateTimePicker from "@react-native-community/datetimepicker";
 //firebase
 import { database } from "../../src/config/fb";
@@ -15,11 +16,14 @@ export default function AddToDoCal({ navigation }) {
     description: "",
     createdAt: new Date(),
   });
+
+  //DateTimePicker
   const [mode, setMode] = React.useState("date");
   const [show, setShow] = React.useState(false);
   const [textDate, setTextDate] = React.useState("Empty");
   const [exc, setExc] = React.useState(false);
 
+  //component onChange for DateTimePicker
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || new Date();
     setShow(Platform.OS === "android");
@@ -35,11 +39,13 @@ export default function AddToDoCal({ navigation }) {
     setTextDate(fDate);
   };
 
+  //Show DateTimeKiperMode
   const showMode = (currentMode) => {
-    setShow(true);
+    setShow("date");
     setMode(currentMode);
   };
 
+  //Checks if newItem has none data"
   const checkNullUnd = () => {
     if (
       newItem.name == "" ||
@@ -49,14 +55,21 @@ export default function AddToDoCal({ navigation }) {
     )
       setExc(true);
   };
-  //Al presionar el boton Add se enviara todos los datos a la base de datos
+  //Send newItem to the Database as a ToDoList entity
   const onSend = async () => {
-    //checkNullUnd();
+    checkNullUnd();
     if (exc === false) {
       await addDoc(collection(database, "ToDoList"), newItem);
       navigation.goBack();
     }
   };
+
+  //Options Priority
+  const priorityLabel = [
+    { label: "Max", value: "Max" },
+    { label: "Mid", value: "Mid" },
+    { label: "Min", value: "Min" },
+  ];
 
   return (
     <RN.View style={styles.container}>
@@ -69,10 +82,9 @@ export default function AddToDoCal({ navigation }) {
           onChangeText={(text) => setNewItem({ ...newItem, name: text })}
         />
         <RN.Text> Priority </RN.Text>
-        <RN.TextInput
-          style={styles.input}
-          placeholder="Add Priority"
-          onChangeText={(text) => setNewItem({ ...newItem, priority: text })}
+        <Select
+          onValueChange={(text) => setNewItem({ ...newItem, priority: text })}
+          items={priorityLabel}
         />
         <RN.Text>Date</RN.Text>
         <RN.Text>{textDate}</RN.Text>
@@ -82,7 +94,6 @@ export default function AddToDoCal({ navigation }) {
             testID="dateTimePicker"
             value={newItem.date}
             mode={mode}
-            is24Hour={true}
             display="default"
             onChange={onChange}
           />
