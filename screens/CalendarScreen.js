@@ -21,7 +21,7 @@ export default function CalendarScreen({ navigation }) {
       setToDoList(
         querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          name: doc.data().name,
+          name: doc.d ata().name,
           date: doc.data().date,
           priority: doc.data().priority,
           description: doc.data().description,
@@ -33,10 +33,48 @@ export default function CalendarScreen({ navigation }) {
   }, []);
   */
   return (
-    <RN.View>
-      <RN.Text>Aqui app</RN.Text>
-      <RN.Button title="+" onPress={() => navigation.navigate("AddToDoCal")} />
+    <RN.View style={styles.container}>
+      <RN.Text style={styles.text}>Month Calendar</RN.Text>
+      <RN.Text style={styles.text}> Days of Week</RN.Text>
+      <RN.Text style={styles.text}> Today Habits</RN.Text>
+      <RN.Text style={styles.text}> Today </RN.Text>
+
+      <RN.TouchableOpacity
+        style={styles.buttonAdd}
+        onPress={() => navigation.navigate("AddToDoCal")}
+      >
+        <RN.Text>+</RN.Text>
+      </RN.TouchableOpacity>
     </RN.View>
   );
 }
+
+const styles = RN.StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 40,
+  },
+  text: {
+    textAlign: "center",
+    paddingTop: 10,
+    borderColor: "#000",
+    borderRadius: 4,
+  },
+  buttonAdd: {
+    width: 70,
+    height: 70,
+    borderColor: "rgba(0,0,0,0.2",
+    justifyContent: "center",
+    padding: 10,
+    borderRadius: 50,
+    backgroundColor: "orange",
+    textTransform: 40,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    position: "absolute",
+    alignSelf: "flex-end",
+    bottom: 10,
+    right: 10,
+  },
+});
 //     {ToDoList.map((ToDoList) => (<toDo key={ToDoList.id} {...ToDoList} />)))

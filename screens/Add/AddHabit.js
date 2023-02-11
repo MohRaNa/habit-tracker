@@ -29,19 +29,19 @@ export default function AddHabit({ navigation }) {
           placeholder="Add Name"
           onChangeText={(text) => setNewItem({ ...newItem, name: text })}
         />
-        <RN.Text> Date </RN.Text>
+        <RN.Text> DWM </RN.Text>
         <RN.TextInput
           style={styles.input}
           placeholder="Add Date"
           onChangeText={(text) => setNewItem({ ...newItem, dwm: text })}
         />
-        <RN.Text> Priority </RN.Text>
+        <RN.Text> Time </RN.Text>
         <RN.TextInput
           style={styles.input}
           placeholder="Add Time"
           onChangeText={(text) => setNewItem({ ...newItem, time: text })}
         />
-        <RN.Text> Description </RN.Text>
+        <RN.Text> Icon </RN.Text>
         <RN.TextInput
           style={styles.input}
           placeholder="Add Icon"

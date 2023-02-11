@@ -22,42 +22,41 @@ const CalendarStack = createNativeStackNavigator();
 const HabitStack = createNativeStackNavigator();
 const TodoStack = createNativeStackNavigator();
 
+//CalendarStackScreen Navigator
 function CalendarStackScreen() {
   return (
     <CalendarStack.Navigator>
       <CalendarStack.Screen
         name="CalendarStkScreen"
         component={CalendarScreen}
+        options={{ headerShown: false }}
       />
-      <CalendarStack.Screen
-        name="AddToDoCal"
-        component={AddToDoCal}
-        options={{ presentation: "modal" }}
-      />
+      <CalendarStack.Screen name="AddToDoCal" component={AddToDoCal} />
     </CalendarStack.Navigator>
   );
 }
+//HabitStackScreen Navigator
 function HabitStackScreen() {
   return (
     <HabitStack.Navigator>
-      <HabitStack.Screen name="HabitStkScreen" component={HabitScreen} />
       <HabitStack.Screen
-        name="AddHabit"
-        component={AddHabit}
-        options={{ presentation: "modal" }}
+        name="HabitStkScreen"
+        component={HabitScreen}
+        options={{ headerShown: false }}
       />
+      <HabitStack.Screen name="AddHabit" component={AddHabit} />
     </HabitStack.Navigator>
   );
 }
 function TodoStackScreen() {
   return (
-    <TodoStack.Navigator>
-      <TodoStack.Screen name="ToDoStkScreen" component={TodoScreen} />
+    <TodoStack.Navigator options={{ headerShown: false }}>
       <TodoStack.Screen
-        name="AddToDo"
-        component={AddToDo}
-        options={{ presentation: "modal" }}
+        name="ToDoStkScreen"
+        component={TodoScreen}
+        options={{ headerShown: false }}
       />
+      <TodoStack.Screen name="AddToDo" component={AddToDo} />
     </TodoStack.Navigator>
   );
 }
@@ -75,6 +74,7 @@ function MyTabs() {
         component={CalendarStackScreen}
         options={{
           tabBarLabel: "Calendar",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Icon name="calendar" color={color} size={size} />
           ),
@@ -85,6 +85,7 @@ function MyTabs() {
         component={HabitStackScreen}
         options={{
           tabBarLabel: "Habit",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Icon name="star" color={color} size={size} />
           ),
@@ -95,6 +96,7 @@ function MyTabs() {
         component={TodoStackScreen}
         options={{
           tabBarLabel: "To-Do",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Icon name="new-message" color={color} size={size} />
           ),
