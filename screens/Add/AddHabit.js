@@ -1,5 +1,6 @@
 import * as RN from "react-native";
 import * as React from "react";
+import { TextInput } from "react-native-paper";
 
 import { database } from "../../src/config/fb";
 import { collection, addDoc } from "firebase/firestore";
@@ -22,27 +23,27 @@ export default function AddHabit({ navigation }) {
   return (
     <RN.View style={styles.container}>
       <RN.View>
-        <RN.Text> Add Calendar </RN.Text>
+        <RN.Text style={styles.text}> Habit Name</RN.Text>
         <RN.Text> Name </RN.Text>
-        <RN.TextInput
+        <TextInput
           style={styles.input}
           placeholder="Add Name"
           onChangeText={(text) => setNewItem({ ...newItem, name: text })}
         />
         <RN.Text> DWM </RN.Text>
-        <RN.TextInput
+        <TextInput
           style={styles.input}
           placeholder="Add Date"
           onChangeText={(text) => setNewItem({ ...newItem, dwm: text })}
         />
         <RN.Text> Time </RN.Text>
-        <RN.TextInput
+        <TextInput
           style={styles.input}
           placeholder="Add Time"
           onChangeText={(text) => setNewItem({ ...newItem, time: text })}
         />
         <RN.Text> Icon </RN.Text>
-        <RN.TextInput
+        <TextInput
           style={styles.input}
           placeholder="Add Icon"
           onChangeText={(text) => setNewItem({ ...newItem, icon: text })}
@@ -54,6 +55,26 @@ export default function AddHabit({ navigation }) {
 }
 
 const styles = RN.StyleSheet.create({
-  container: {},
-  input: {},
+  container: {
+    margin: 15,
+    flex: 1,
+  },
+  text: {
+    fontSize: 20,
+    justifyContent: "center",
+    textAlign: "center",
+  },
+  textDescribe: {
+    paddingTop: 10,
+  },
+  textInputToDO: {
+    marginTop: 20,
+  },
+  buttonDate: {
+    maginTop: 20,
+  },
+  buttonAdd: {
+    position: "absolute",
+    alignSelf: "flex-end",
+  },
 });

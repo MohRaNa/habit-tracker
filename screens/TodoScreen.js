@@ -7,7 +7,7 @@ export default function TodoScreen({ navigation }) {
       <RN.Text style={styles.text}>Aqui app</RN.Text>
       <RN.TouchableOpacity
         style={styles.buttonAdd}
-        title="+"
+        text="+"
         onPress={() => navigation.navigate("AddToDo")}
       />
     </RN.View>

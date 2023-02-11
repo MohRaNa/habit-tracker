@@ -2,11 +2,12 @@ import * as RN from "react-native";
 import * as React from "react";
 import Select from "react-native-picker-select";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { TextInput } from "react-native-paper";
 //firebase
 import { database } from "../../src/config/fb";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function AddToDo({ navigation }) {
+export default function AddToDoCal({ navigation }) {
   //Values Name, Date, Priority(Options), Description
   const [newItem, setNewItem] = React.useState({
     name: "",
@@ -74,21 +75,26 @@ export default function AddToDo({ navigation }) {
   return (
     <RN.View style={styles.container}>
       <RN.View>
-        <RN.Text> Add Calendar </RN.Text>
-        <RN.Text> Name </RN.Text>
-        <RN.TextInput
-          style={styles.input}
+        <RN.Text style={styles.text}> Add To Do </RN.Text>
+        <RN.Text style={styles.textDescribe}> Name </RN.Text>
+        <TextInput
+          style={styles.textInputToDO}
           placeholder="Add Name"
           onChangeText={(text) => setNewItem({ ...newItem, name: text })}
         />
-        <RN.Text> Priority </RN.Text>
+        <RN.Text style={styles.textDescribe}> Priority </RN.Text>
         <Select
+          style={styles.textInputToDO}
           onValueChange={(text) => setNewItem({ ...newItem, priority: text })}
           items={priorityLabel}
         />
-        <RN.Text>Date</RN.Text>
-        <RN.Text>{textDate}</RN.Text>
-        <RN.Button title="DatePicker" onPress={() => showMode("date")} />
+        <RN.Text style={styles.textDescribe}>Date</RN.Text>
+        <RN.Text style={styles.textInputToDO}>{textDate}</RN.Text>
+        <RN.Button
+          style={styles.buttonDate}
+          title="DatePicker"
+          onPress={() => showMode("date")}
+        />
         {show && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -98,19 +104,39 @@ export default function AddToDo({ navigation }) {
             onChange={onChange}
           />
         )}
-        <RN.Text> Description </RN.Text>
-        <RN.TextInput
-          style={styles.input}
+        <RN.Text style={styles.textDescribe}> Description </RN.Text>
+        <TextInput
+          style={styles.textInputToDO}
           placeholder="Add Description"
           onChangeText={(text) => setNewItem({ ...newItem, description: text })}
         />
-        <RN.Button title="Add" onPress={onSend} />
+        <RN.Button style={styles.buttonAdd} onPress={onSend} title="ADD" />
       </RN.View>
     </RN.View>
   );
 }
 
 const styles = RN.StyleSheet.create({
-  container: {},
-  input: {},
+  container: {
+    margin: 15,
+    flex: 1,
+  },
+  text: {
+    fontSize: 20,
+    justifyContent: "center",
+    textAlign: "center",
+  },
+  textDescribe: {
+    paddingTop: 10,
+  },
+  textInputToDO: {
+    marginTop: 20,
+  },
+  buttonDate: {
+    maginTop: 20,
+  },
+  buttonAdd: {
+    position: "absolute",
+    alignSelf: "flex-end",
+  },
 });
