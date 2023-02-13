@@ -12,25 +12,29 @@ export default function AddToDoCal({ navigation }) {
   const [newItem, setNewItem] = React.useState({
     name: "",
     date: new Date(),
-    time: "",
+    time: new Date().getTime,
     priority: "",
     description: "",
     createdAt: new Date(),
   });
 
-  //DateTimePicker
+  //DatePicker
   const [mode, setMode] = React.useState("date");
   const [show, setShow] = React.useState(false);
   const [textDate, setTextDate] = React.useState("Empty");
-  const [exc, setExc] = React.useState(false);
+  const [textTime, setTextTime] = React.useState("0:00");
+
+  //TimePicker
 
   //component onChange for DateTimePicker
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || new Date();
+  const onChangeDate = (event, selectedDate) => {
+    const currentDate = selectedDate || newItem.date;
     setShow(Platform.OS === "android");
     setNewItem({ ...newItem, date: currentDate });
 
     let tempDate = new Date(currentDate);
+
+    //Set Date Text
     let fDate =
       tempDate.getDate() +
       "/" +
@@ -38,6 +42,18 @@ export default function AddToDoCal({ navigation }) {
       "/" +
       tempDate.getFullYear();
     setTextDate(fDate);
+
+    //Set Time Text
+    let fTime = tempDate.getHours() + " : " + tempDate.getMinutes();
+    setTextTime(fTime);
+  };
+
+  const onChangeTime = (event, selectTime) => {
+    const currentTime = selectTime || new Date().getDate;
+    setShow(Platform.OS === "android");
+    setNewItem({ ...newItem, time: currentTime });
+
+    let tempTime = new Date().getTime(currentTime);
   };
 
   //Show DateTimeKiperMode
@@ -46,6 +62,8 @@ export default function AddToDoCal({ navigation }) {
     setMode(currentMode);
   };
 
+  //Check Data
+  const [exc, setExc] = React.useState(false);
   //Checks if newItem has none data"
   const checkNullUnd = () => {
     if (
@@ -90,28 +108,35 @@ export default function AddToDoCal({ navigation }) {
         />
         <RN.Text style={styles.textDescribe}>Date</RN.Text>
         <RN.Text style={styles.textInputToDO}>{textDate}</RN.Text>
-        <RN.Button
-          style={styles.buttonDate}
-          title="DatePicker"
-          onPress={() => showMode("date")}
-        />
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={newItem.date}
-            mode={mode}
-            display="default"
-            onChange={onChange}
-          />
-        )}
+        <RN.View style={styles.buttonDate}>
+          <RN.Button onPress={() => showMode("date")} title="Date" />
+        </RN.View>
+        <RN.Text style={styles.textDescribe}>Date</RN.Text>
+        <RN.Text style={styles.textInputToDO}>{textTime}</RN.Text>
+        <RN.View style={styles.buttonDate}>
+          <RN.Button onPress={() => showMode("time")} title="Time" />
+        </RN.View>
+        <RN.Text style={styles.textDescribe}>Time To Do</RN.Text>
+        <RN.Text style={styles.textInputToDO}>Time</RN.Text>
         <RN.Text style={styles.textDescribe}> Description </RN.Text>
         <TextInput
           style={styles.textInputToDO}
           placeholder="Add Description"
           onChangeText={(text) => setNewItem({ ...newItem, description: text })}
         />
-        <RN.Button style={styles.buttonAdd} onPress={onSend} title="ADD" />
+        <RN.View style={styles.buttonAdd}>
+          <RN.Button onPress={onSend} title="ADD" />
+        </RN.View>
       </RN.View>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={newItem.date}
+          mode={mode}
+          display="default"
+          onChange={onChangeDate}
+        />
+      )}
     </RN.View>
   );
 }
@@ -134,9 +159,12 @@ const styles = RN.StyleSheet.create({
   },
   buttonDate: {
     maginTop: 20,
+    paddingTop: 10,
   },
   buttonAdd: {
     position: "absolute",
     alignSelf: "flex-end",
+    bottom: -30,
+    right: 0,
   },
 });

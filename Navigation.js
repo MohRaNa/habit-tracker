@@ -65,8 +65,9 @@ function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="CalendarScreen"
-      screenOption={{
+      screenOptions={{
         tabBarActiveTinColor: "blue",
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tab.Screen
