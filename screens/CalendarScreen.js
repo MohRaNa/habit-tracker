@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as RN from "react-native";
+import { Calendar } from "react-native-calendars";
 
 //firebase
 import { database } from "../src/config/fb";
@@ -34,8 +35,7 @@ export default function CalendarScreen({ navigation }) {
   */
   return (
     <RN.View style={styles.container}>
-      <RN.Text style={styles.text}>Month Calendar</RN.Text>
-      <RN.Text style={styles.text}> Days of Week</RN.Text>
+      <Calendar style={styles.calendar} />
       <RN.Text style={styles.text}> Today Habits</RN.Text>
       <RN.Text style={styles.text}> Today </RN.Text>
 
@@ -56,7 +56,7 @@ const styles = RN.StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    paddingTop: 10,
+    paddingTop: 20,
     borderColor: "#000",
     borderRadius: 4,
   },
@@ -75,6 +75,14 @@ const styles = RN.StyleSheet.create({
     alignSelf: "flex-end",
     bottom: 10,
     right: 10,
+  },
+  calendar: {
+    top: 10,
+    paddingTop: 10,
+    left: 20,
+    width: 350,
+    borderRadius: 10,
+    elevation: 4,
   },
 });
 //     {ToDoList.map((ToDoList) => (<toDo key={ToDoList.id} {...ToDoList} />)))

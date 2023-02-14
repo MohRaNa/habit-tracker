@@ -1,9 +1,11 @@
 import * as React from "react";
 import * as RN from "react-native";
+import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 
 export default function HabitScreen({ navigation }) {
   return (
     <RN.View style={styles.container}>
+      
       <RN.Text style={styles.text}>Mes</RN.Text>
       <RN.Text style={styles.text}>Dias de la semana</RN.Text>
       <RN.Text style={styles.text}>Desplegar Listas de Habits</RN.Text>
